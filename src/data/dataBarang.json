@@ -1,0 +1,34 @@
+[
+  {
+    "nomor": "1",
+    "judul": "Laptop ASUS",
+    "kategori": "Elektronik",
+    "gambar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Z1erudZ2B0LAgR5RzGKPs_8xaa9VkGFY1g&s",
+    "link": "https://example.com/laptop-asus",
+    "deskripsi": "Laptop terbaik 2024"
+  },
+  {
+    "nomor": "2",
+    "judul": "Kaos Polos",
+    "kategori": "Pakaian",
+    "gambar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Z1erudZ2B0LAgR5RzGKPs_8xaa9VkGFY1g&s",
+    "link": "https://example.com/kaos-polos",
+    "deskripsi": "Bahannya adem, cotton combed 30s"
+  },
+  {
+    "nomor": "3",
+    "judul": "Kopi Arabica",
+    "kategori": "Makanan",
+    "gambar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Z1erudZ2B0LAgR5RzGKPs_8xaa9VkGFY1g&s",
+    "link": "https://example.com/kopi-arabica",
+    "deskripsi": "Kopi terbaik 2024"
+  },
+  {
+    "nomor": "4",
+    "judul": "Serum Glad2Glow",
+    "kategori": "Skincare",
+    "gambar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Z1erudZ2B0LAgR5RzGKPs_8xaa9VkGFY1g&s",
+    "link": "https://example.com/kopi-arabica",
+    "deskripsi": "Serum terbaik 2024"
+  }
+]
