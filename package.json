@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.2",
     "@mui/material": "^6.4.2",
     "cra-template": "1.2.0",
     "react": "^19.0.0",
@@ -16,7 +17,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -37,6 +40,8 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^6.3.0",
     "web-vitals": "^4.2.4"
-  }
+  },
+  "homepage": "https://lepitee-link.github.io/tiktok"
 }

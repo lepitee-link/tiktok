@@ -1,10 +1,29 @@
+:root {
+  --primary-color: #b89b45; /* Kuning agak gelap dengan saturasi lebih rendah */
+  --background-color: #f7f4b2; /* Kuning cerah dengan saturasi lebih rendah */
+  --text-color: #454fb8; /* Warna komplemen dari kuning */
+  --box-color: #d9c98a; /* Warna box yang cocok dengan background */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  margin: 0.5 rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  margin: 1rem; /* Updated margin */
+  background-color: var(--background-color); /* Updated background color */
+  font-family: "Raleway", sans-serif;
+  color: var(--text-color); /* Warna teks menggunakan warna komplemen */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--primary-color);
 }
 
 code {
@@ -12,13 +31,13 @@ code {
     monospace;
 }
 
-body {
-  background-color: #eff0b9;
-  font-family: "Raleway", sans-serif;
+.box {
+  background-color: var(--box-color);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h1,
-h2,
-h3 {
-  color: #9c6ef0;
+.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: #ffa500 !important;
 }

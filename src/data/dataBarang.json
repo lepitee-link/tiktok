@@ -1,34 +1,18 @@
 [
   {
     "nomor": "1",
-    "judul": "Laptop ASUS",
-    "kategori": "Elektronik",
-    "gambar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Z1erudZ2B0LAgR5RzGKPs_8xaa9VkGFY1g&s",
-    "link": "https://example.com/laptop-asus",
-    "deskripsi": "Laptop terbaik 2024"
+    "judul": "MAKE OVER Powerstay Glazed Lock Lip Pigment",
+    "kategori": "Produk Kecantikan",
+    "gambar": "produk/MAKEOVER POWERSTAY GLAZED.jpeg",
+    "link": "https://vt.tokopedia.com/t/ZS6TcFW1E/",
+    "deskripsi": "Untuk bibir plump & glazy yang uncrackable, tahan hinggan 24 jam!"
   },
   {
     "nomor": "2",
-    "judul": "Kaos Polos",
-    "kategori": "Pakaian",
-    "gambar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Z1erudZ2B0LAgR5RzGKPs_8xaa9VkGFY1g&s",
-    "link": "https://example.com/kaos-polos",
-    "deskripsi": "Bahannya adem, cotton combed 30s"
-  },
-  {
-    "nomor": "3",
-    "judul": "Kopi Arabica",
-    "kategori": "Makanan",
-    "gambar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Z1erudZ2B0LAgR5RzGKPs_8xaa9VkGFY1g&s",
-    "link": "https://example.com/kopi-arabica",
-    "deskripsi": "Kopi terbaik 2024"
-  },
-  {
-    "nomor": "4",
-    "judul": "Serum Glad2Glow",
-    "kategori": "Skincare",
-    "gambar": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0Z1erudZ2B0LAgR5RzGKPs_8xaa9VkGFY1g&s",
-    "link": "https://example.com/kopi-arabica",
-    "deskripsi": "Serum terbaik 2024"
+    "judul": "Facetology Triple care Hydra Cleanse Micellar Water",
+    "kategori": "Produk Kecantikan",
+    "gambar": "produk/facetology micellar water.jpeg",
+    "link": "https://vt.tokopedia.com/t/ZS6TvcXuA/",
+    "deskripsi": "Pembersih lembut tanpa bilas untuk semua jenis kulit"
   }
 ]

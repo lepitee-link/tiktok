@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import {
   TextField,
   Grid,
@@ -8,203 +8,257 @@ import {
   FormControl,
   Box,
   Typography,
-  Divider,
   Container,
   Button,
 } from "@mui/material";
+import SearchOffIcon from "@mui/icons-material/SearchOff";
 
 const BarangList = ({ barangData }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterKategori, setFilterKategori] = useState("");
 
-  // Mengambil semua kategori unik dari data barang
   const categories = [...new Set(barangData.map((item) => item.kategori))];
 
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleFilterChange = (e) => {
-    setFilterKategori(e.target.value);
-  };
-
-  const filteredBarang = barangData.filter((item) => {
-    return (
-      (item.judul.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.nomor.includes(searchTerm)) &&
-      (filterKategori ? item.kategori === filterKategori : true)
-    );
-  });
+  const filteredBarang = useMemo(() => {
+    return barangData.filter((item) => {
+      return (
+        (item.judul.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.nomor.includes(searchTerm)) &&
+        (filterKategori ? item.kategori === filterKategori : true)
+      );
+    });
+  }, [barangData, searchTerm, filterKategori]);
 
   return (
-    <Container
-      style={{ paddingLeft: 0, paddingRight: 0, backgroundColor: "#F0E7B9" }}
-    >
-      {/* Card for Search and Filter Form */}
-      <Box
-        style={{
-          backgroundColor: "#F0E7B9",
-          marginBottom: "20px",
-          padding: "20px",
-        }}
-      >
+    <Container sx={{ px: 0, mb: 4 }}>
+      <Box sx={{ mb: 2, p: 1 }}>
         <Typography
           variant="h6"
           align="center"
           gutterBottom
-          style={{ color: "#3C2C53" }}
+          color="#3C2C53"
+          fontFamily="'Poppins', sans-serif"
         >
-          Ketik nama / nomor barang yang akan kamu cari atau pilih kategori
-          barang yang kamu inginkan, happy shopping! 💕💕💕
+          Ketik nama / nomor barang yang akan kamu cari atau pilih kategori,
+          happy shopping! 💕💕💕
         </Typography>
-
-        {/* Divider between text and form */}
-        <Divider style={{ marginBottom: "20px" }} />
-
-        {/* Form for Search */}
-        <TextField
-          label="Cari Barang"
-          variant="outlined"
-          fullWidth
-          onChange={handleSearch}
-          margin="normal"
-          style={{ backgroundColor: "white" }}
-        />
-
-        {/* Form for Filter by Category */}
-        <FormControl fullWidth margin="normal">
-          <InputLabel>Kategori</InputLabel>
-          <Select
-            value={filterKategori}
-            onChange={handleFilterChange}
-            style={{ backgroundColor: "white" }}
-          >
-            <MenuItem value="">Semua</MenuItem>
-            {categories.map((kategori, index) => (
-              <MenuItem key={index} value={kategori}>
-                {kategori}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-      </Box>
-
-      {/* Divider between form and list */}
-      <Divider style={{ marginBottom: "20px" }} />
-
-      {/* Jika tidak ada barang yang ditemukan */}
-      {filteredBarang.length === 0 ? (
-        <Box textAlign="center" padding="40px">
-          {/* Ilustrasi Not Found SVG */}
-          <img
-            src="https://www.svgrepo.com/show/315006/not-found.svg"
-            alt="Not Found"
-            style={{
-              width: "auto",
-              maxWidth: "300px",
-              height: "auto",
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            gap: 1,
+          }}
+        >
+          <TextField
+            label="Cari Barang"
+            variant="outlined"
+            fullWidth
+            onChange={(e) => setSearchTerm(e.target.value)}
+            sx={{
+              backgroundColor: "white",
+              fontSize: "0.875rem",
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "#ccc",
+                },
+                "&:hover fieldset": {
+                  borderColor: "#FFA500",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "#FFA500",
+                },
+              },
+              "& .MuiInputLabel-root": {
+                color: "#aaa",
+                "&.Mui-focused": {
+                  color: "#FFA500",
+                },
+                fontFamily: "'Poppins', sans-serif", // Match the app font
+              },
             }}
+            inputProps={{ "aria-label": "Cari Barang" }}
           />
-          <Typography
-            variant="h6"
-            style={{ marginTop: "20px", color: "#3C2C53" }}
-          >
-            Oops, barang yang kamu cari belum ada nih!
-          </Typography>
-        </Box>
-      ) : (
-        <Grid container spacing={3}>
-          {/* Display Filtered Barang */}
-          {filteredBarang.map((barang, index) => (
-            <Grid item xs={12} key={barang.nomor}>
-              {/* Layout without Card */}
-              <Box
-                display="flex"
-                alignItems="center"
-                padding="15px"
-                style={{
-                  backgroundColor: "#FFFFFF", // Background for each item
-                  boxShadow: "0 4px 8px rgba(112, 104, 59, 0.3)", // Shadow with color #70683B
-                  marginBottom: "15px",
+          <FormControl fullWidth variant="outlined">
+            <InputLabel
+              sx={{
+                color: "#aaa",
+                "&.Mui-focused": {
+                  color: "#FFA500",
+                },
+                fontFamily: "'Poppins', sans-serif", // Match the app font
+              }}
+            >
+              Kategori
+            </InputLabel>
+            <Select
+              value={filterKategori}
+              onChange={(e) => setFilterKategori(e.target.value)}
+              sx={{
+                backgroundColor: "white",
+                fontSize: "0.875rem",
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "#ccc",
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#FFA500",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#FFA500",
+                  },
+                },
+                "& .MuiSelect-icon": {
+                  color: "#FFA500",
+                },
+                "& .MuiInputLabel-root": {
+                  color: "#aaa",
+                  "&.Mui-focused": {
+                    color: "#FFA500",
+                  },
+                  fontFamily: "'Poppins', sans-serif", // Match the app font
+                },
+              }}
+            >
+              <MenuItem
+                value=""
+                sx={{
+                  "&:hover": { backgroundColor: "#FFA500", color: "white" },
+                  "&.Mui-selected": {
+                    backgroundColor: "#FFA500",
+                    color: "white",
+                  },
                 }}
               >
-                {/* Left: Nomor, Judul, Deskripsi, and Link */}
-                <Box flex={1}>
-                  {/* Nomor di atas Judul */}
-                  <Typography
-                    variant="body2"
-                    style={{
-                      fontSize: "10pt",
-                      fontWeight: "300",
-                      color: "#3C2C53",
-                    }}
-                  >
-                    No. {barang.nomor}
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    style={{
-                      fontSize: "12pt",
-                      fontWeight: "bold",
-                      color: "#3C2C53",
-                    }}
-                  >
-                    {barang.judul}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    style={{
-                      fontSize: "10pt",
-                      fontWeight: "300",
-                      marginBottom: "10px",
-                      color: "#3C2C53",
-                    }}
-                  >
-                    {barang.deskripsi}
-                  </Typography>
-                  {/* Link Pembelian dengan Warna Baru */}
-                  <Button
-                    href={barang.link}
-                    target="_blank"
-                    style={{
-                      fontSize: "10pt",
-                      border: "1px solid #70683B", // Outline border
-                      padding: "5px 10px",
-                      textTransform: "none",
-                      display: "inline-block",
-                      color: "#70683B", // Warna link
-                    }}
-                  >
-                    Cek barangnya disini💕
-                  </Button>
-                </Box>
-
-                {/* Right: Gambar Barang dengan Frame dan Shadow */}
-                <Box
-                  style={{ flexShrink: 0, width: "40%", paddingLeft: "10px" }}
+                Semua
+              </MenuItem>
+              {categories.map((kategori, index) => (
+                <MenuItem
+                  key={index}
+                  value={kategori}
+                  sx={{
+                    cursor: "pointer",
+                    "&:hover": { backgroundColor: "#FFA500", color: "white" },
+                    "&.Mui-selected": {
+                      backgroundColor: "#FFA500",
+                      color: "white",
+                    },
+                  }}
                 >
-                  <img
-                    src={barang.gambar}
-                    alt={barang.judul}
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      aspectRatio: "1/1",
-                      objectFit: "cover",
-                      border: "3px solid #A397D8", // Frame gambar lebih besar
-                      boxShadow: "0 4px 8px rgba(112, 104, 59, 0.3)", // Shadow dengan warna #70683B
-                      borderRadius: "8px", // Optional: rounded corners
-                    }}
-                  />
-                </Box>
-              </Box>
+                  {kategori}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </Box>
+      </Box>
 
-              {/* Divider (Pemisah Garis) */}
-              <Divider style={{ margin: "10px 0" }} />
-            </Grid>
-          ))}
-        </Grid>
-      )}
+      <Box>
+        {filteredBarang.length === 0 ? (
+          <Box textAlign="center" padding={5}>
+            <SearchOffIcon sx={{ fontSize: 60, color: "#3C2C53" }} />
+            <Typography
+              variant="h6"
+              mt={2}
+              color="#3C2C53"
+              fontFamily="'Poppins', sans-serif"
+            >
+              Oops, barang yang kamu cari belum ada nih!
+            </Typography>
+          </Box>
+        ) : (
+          <Grid container spacing={1}>
+            {filteredBarang.map((barang, index) => (
+              <Grid item xs={12} key={barang.nomor}>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  sx={{
+                    backgroundColor: "transparent",
+                    flexDirection: index % 2 === 0 ? "row" : "row-reverse",
+                    mb: 0.5,
+                  }}
+                >
+                  <Box flex={1}>
+                    <Box sx={{ borderTop: "3px solid #FFA500", pt: 1 }}>
+                      <Typography
+                        variant="body2"
+                        fontSize={12}
+                        fontWeight={300}
+                        color="#3C2C53"
+                        fontFamily="'Poppins', sans-serif"
+                      >
+                        No. {barang.nomor}
+                      </Typography>
+                      <Typography
+                        variant="h6"
+                        fontSize={16}
+                        fontWeight="bold"
+                        color="#3C2C53"
+                        fontFamily="'Poppins', sans-serif"
+                      >
+                        {barang.judul}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        fontSize={12}
+                        fontWeight={300}
+                        mb={1}
+                        color="#3C2C53"
+                        fontFamily="'Poppins', sans-serif"
+                      >
+                        {barang.deskripsi}
+                      </Typography>
+                      <Button
+                        href={barang.link}
+                        target="_blank"
+                        sx={{
+                          fontSize: 12,
+                          border: "1px solid #70683B",
+                          padding: "6px 12px",
+                          textTransform: "none",
+                          color: "#FFA500",
+                          backgroundColor: "transparent",
+                          fontFamily: "'Poppins', sans-serif", // Match the app font
+                        }}
+                        aria-label={`Cek barang ${barang.judul}`}
+                      >
+                        Cek barangnya disini💕
+                      </Button>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      flexShrink: 0,
+                      width: "40%",
+                      pl: index % 2 === 0 ? 2 : 0,
+                      pr: index % 2 !== 0 ? 2 : 0,
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        backgroundColor: "#FFA500",
+                        borderRadius: "8px",
+                        overflow: "hidden",
+                      }}
+                    >
+                      <img
+                        src={`${process.env.PUBLIC_URL}/${barang.gambar}`}
+                        alt={barang.judul}
+                        style={{
+                          width: "100%",
+                          height: "auto",
+                          objectFit: "cover",
+                          border: "none",
+                        }}
+                      />
+                    </Box>
+                  </Box>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        )}
+      </Box>
     </Container>
   );
 };
