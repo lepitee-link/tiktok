@@ -36,7 +36,7 @@ const BarangList = ({ barangData }) => {
           variant="h6"
           align="center"
           gutterBottom
-          color="#3C2C53"
+          color="#192019"
           fontFamily="'Poppins', sans-serif"
         >
           Ketik nama / nomor barang yang akan kamu cari atau pilih kategori,
@@ -159,7 +159,7 @@ const BarangList = ({ barangData }) => {
             <Typography
               variant="h6"
               mt={2}
-              color="#3C2C53"
+              color="#192019"
               fontFamily="'Poppins', sans-serif"
             >
               Oops, barang yang kamu cari belum ada nih!
@@ -184,7 +184,7 @@ const BarangList = ({ barangData }) => {
                         variant="body2"
                         fontSize={12}
                         fontWeight={300}
-                        color="#3C2C53"
+                        color="#192019"
                         fontFamily="'Poppins', sans-serif"
                       >
                         No. {barang.nomor}
@@ -193,7 +193,7 @@ const BarangList = ({ barangData }) => {
                         variant="h6"
                         fontSize={16}
                         fontWeight="bold"
-                        color="#3C2C53"
+                        color="#FFA500"
                         fontFamily="'Poppins', sans-serif"
                       >
                         {barang.judul}
@@ -203,7 +203,7 @@ const BarangList = ({ barangData }) => {
                         fontSize={12}
                         fontWeight={300}
                         mb={1}
-                        color="#3C2C53"
+                        color="#192019"
                         fontFamily="'Poppins', sans-serif"
                       >
                         {barang.deskripsi}
@@ -213,7 +213,7 @@ const BarangList = ({ barangData }) => {
                         target="_blank"
                         sx={{
                           fontSize: 12,
-                          border: "1px solid #70683B",
+                          border: "1px solid #192019",
                           padding: "6px 12px",
                           textTransform: "none",
                           color: "#FFA500",

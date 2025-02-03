@@ -1,7 +1,7 @@
 :root {
   --primary-color: #b89b45; /* Kuning agak gelap dengan saturasi lebih rendah */
-  --background-color: #f7f4b2; /* Kuning cerah dengan saturasi lebih rendah */
-  --text-color: #454fb8; /* Warna komplemen dari kuning */
+  --background-color: #fff9e6; /* Kuning cerah dengan saturasi lebih rendah */
+  --text-color: #192019; /* Warna komplemen dari kuning */
   --box-color: #d9c98a; /* Warna box yang cocok dengan background */
 }
 
