@@ -63,7 +63,7 @@ const App = () => {
           severity="info"
           sx={{ backgroundColor: "#FFA500", color: "white" }}
         >
-          Pasang aplikasi untuk pengalaman lebih baik!
+          yuk install aplikasinya!💕
           <Button
             onClick={handleInstallClick}
             size="small"
