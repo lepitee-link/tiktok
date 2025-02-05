@@ -10,7 +10,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("tiktok/data/dataBarang.json");
+        const response = await fetch("/data/dataBarang.json");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
