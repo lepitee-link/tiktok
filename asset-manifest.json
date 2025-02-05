@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/tiktok/static/css/main.adae5ec5.css",
-    "main.js": "/tiktok/static/js/main.6c7fac7a.js",
+    "main.js": "/tiktok/static/js/main.f17c9728.js",
     "static/js/488.0473b1b7.chunk.js": "/tiktok/static/js/488.0473b1b7.chunk.js",
     "index.html": "/tiktok/index.html",
     "main.adae5ec5.css.map": "/tiktok/static/css/main.adae5ec5.css.map",
-    "main.6c7fac7a.js.map": "/tiktok/static/js/main.6c7fac7a.js.map",
+    "main.f17c9728.js.map": "/tiktok/static/js/main.f17c9728.js.map",
     "488.0473b1b7.chunk.js.map": "/tiktok/static/js/488.0473b1b7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.adae5ec5.css",
-    "static/js/main.6c7fac7a.js"
+    "static/js/main.f17c9728.js"
   ]
 }
