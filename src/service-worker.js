@@ -20,3 +20,9 @@ self.addEventListener("fetch", (event) => {
     })
   );
 });
+
+self.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  window.deferredPrompt = event;
+  console.log("Install prompt event saved.");
+});
