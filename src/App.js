@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Container, Snackbar, Button, Alert } from "@mui/material";
+import { Container, Button, Snackbar } from "@mui/material";
 import BarangList from "./components/BarangList";
 import dataBarang from "./data/dataBarang.json";
 
 const App = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
 
   useEffect(() => {
     const handler = (event) => {
       event.preventDefault();
       setDeferredPrompt(event);
-      setOpenSnackbar(true); // Tampilkan snackbar saat event beforeinstallprompt muncul
+      console.log("Install prompt event saved.");
     };
     window.addEventListener("beforeinstallprompt", handler);
 
@@ -28,44 +29,57 @@ const App = () => {
           console.log("User dismissed the install prompt.");
         }
         setDeferredPrompt(null);
-        setOpenSnackbar(false);
       });
     }
   };
 
+  // Function to check for updates in dataBarang.json
+  const checkForUpdates = async () => {
+    try {
+      const response = await fetch("/data/dataBarang.json");
+      const updatedData = await response.json();
+
+      if (JSON.stringify(updatedData) !== JSON.stringify(dataBarang)) {
+        showSnackbar("Ada produk baru, cek sekarang!");
+      }
+    } catch (error) {
+      console.error("Error fetching dataBarang.json:", error);
+    }
+  };
+
+  const showSnackbar = (message) => {
+    setSnackbarMessage(message);
+    setSnackbarOpen(true);
+  };
+
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
+  // Polling to check for updates every 30 seconds
+  useEffect(() => {
+    const intervalId = setInterval(checkForUpdates, 30000);
+    return () => clearInterval(intervalId); // Cleanup on component unmount
+  }, []);
+
   return (
     <Container style={{ maxWidth: "475px", paddingLeft: 0, paddingRight: 0 }}>
       <BarangList barangData={dataBarang} />
-
-      {/* Snackbar untuk PWA Install */}
-      <Snackbar
-        open={openSnackbar}
-        onClose={() => setOpenSnackbar(false)}
-        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-        autoHideDuration={6000} // Snackbar akan hilang otomatis dalam 6 detik
-      >
-        <Alert
-          severity="info"
-          sx={{
-            backgroundColor: "#b89b45", // Warna theme
-            color: "#FFF9E6", // Warna teks biar kontras
-            fontWeight: "bold",
-          }}
-          action={
-            <Button
-              onClick={handleInstallClick}
-              sx={{
-                color: "#FFF9E6",
-                fontWeight: "bold",
-              }}
-            >
-              Install
-            </Button>
-          }
+      {deferredPrompt && (
+        <Button
+          onClick={handleInstallClick}
+          variant="contained"
+          color="primary"
         >
-          Yuk install aplikasinya! 💕💕💕
-        </Alert>
-      </Snackbar>
+          Install App
+        </Button>
+      )}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackbarClose}
+        message={snackbarMessage}
+      />
     </Container>
   );
 };
