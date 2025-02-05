@@ -36,10 +36,10 @@ const BarangList = ({ barangData }) => {
           variant="h6"
           align="center"
           gutterBottom
-          color="#192019"
+          color="var(--text-color)"
           fontFamily="'Poppins', sans-serif"
         >
-          Ketik nama / nomor barang yang akan kamu cari atau pilih kategori,
+          Ketik nama / nomor barang yang akan kamu cari atau pilih kategorinya,
           happy shopping! 💕💕💕
         </Typography>
         <Box
@@ -73,7 +73,7 @@ const BarangList = ({ barangData }) => {
                 "&.Mui-focused": {
                   color: "#FFA500",
                 },
-                fontFamily: "'Poppins', sans-serif", // Match the app font
+                fontFamily: "'Poppins', sans-serif",
               },
             }}
             inputProps={{ "aria-label": "Cari Barang" }}
@@ -85,7 +85,7 @@ const BarangList = ({ barangData }) => {
                 "&.Mui-focused": {
                   color: "#FFA500",
                 },
-                fontFamily: "'Poppins', sans-serif", // Match the app font
+                fontFamily: "'Poppins', sans-serif",
               }}
             >
               Kategori
@@ -115,7 +115,7 @@ const BarangList = ({ barangData }) => {
                   "&.Mui-focused": {
                     color: "#FFA500",
                   },
-                  fontFamily: "'Poppins', sans-serif", // Match the app font
+                  fontFamily: "'Poppins', sans-serif",
                 },
               }}
             >
@@ -159,7 +159,7 @@ const BarangList = ({ barangData }) => {
             <Typography
               variant="h6"
               mt={2}
-              color="#192019"
+              color="var(--text-color)"
               fontFamily="'Poppins', sans-serif"
             >
               Oops, barang yang kamu cari belum ada nih!
@@ -184,7 +184,7 @@ const BarangList = ({ barangData }) => {
                         variant="body2"
                         fontSize={12}
                         fontWeight={300}
-                        color="#192019"
+                        color="var(--text-color)"
                         fontFamily="'Poppins', sans-serif"
                       >
                         No. {barang.nomor}
@@ -203,7 +203,7 @@ const BarangList = ({ barangData }) => {
                         fontSize={12}
                         fontWeight={300}
                         mb={1}
-                        color="#192019"
+                        color="var(--text-color)"
                         fontFamily="'Poppins', sans-serif"
                       >
                         {barang.deskripsi}
@@ -213,12 +213,12 @@ const BarangList = ({ barangData }) => {
                         target="_blank"
                         sx={{
                           fontSize: 12,
-                          border: "1px solid #192019",
+                          border: "1px solid var(--text-color)",
                           padding: "6px 12px",
                           textTransform: "none",
                           color: "#FFA500",
                           backgroundColor: "transparent",
-                          fontFamily: "'Poppins', sans-serif", // Match the app font
+                          fontFamily: "'Poppins', sans-serif",
                         }}
                         aria-label={`Cek barang ${barang.judul}`}
                       >

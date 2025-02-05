@@ -1,25 +1,49 @@
 import React from "react";
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Button,
-} from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 
-const BarangCard = ({ nomor, judul, gambar, link }) => {
+const BarangCard = ({ barang }) => {
   return (
-    <Card style={{ backgroundColor: "#EBE9CA", marginBottom: "20px" }}>
-      <CardMedia component="img" height="140" image={gambar} alt={judul} />
-      <CardContent>
-        <Typography variant="h6">
-          {nomor}. {judul}
-        </Typography>
-        <Button href={link} target="_blank" color="primary">
-          Pembelian
-        </Button>
-      </CardContent>
-    </Card>
+    <Box
+      sx={{
+        border: "1px solid var(--text-color)",
+        borderRadius: "8px",
+        padding: 2,
+        backgroundColor: "#FFF",
+        boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+      }}
+    >
+      <img
+        src={`${process.env.PUBLIC_URL}/${barang.gambar}`}
+        alt={barang.judul}
+        style={{
+          width: "100%",
+          height: "auto",
+          objectFit: "cover",
+          borderRadius: "8px",
+        }}
+      />
+      <Typography
+        variant="h6"
+        color="var(--text-color)"
+        fontFamily="'Poppins', sans-serif"
+      >
+        {barang.judul}
+      </Typography>
+      <Button
+        href={barang.link}
+        target="_blank"
+        sx={{
+          border: "1px solid var(--text-color)",
+          backgroundColor: "#FFA500",
+          color: "#FFF",
+          marginTop: 1,
+          textTransform: "none",
+          fontFamily: "'Poppins', sans-serif",
+        }}
+      >
+        Cek barangnya disini💕
+      </Button>
+    </Box>
   );
 };
 

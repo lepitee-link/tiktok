@@ -1,8 +1,8 @@
 :root {
-  --primary-color: #b89b45; /* Kuning agak gelap dengan saturasi lebih rendah */
-  --background-color: #fff9e6; /* Kuning cerah dengan saturasi lebih rendah */
-  --text-color: #192019; /* Warna komplemen dari kuning */
-  --box-color: #d9c98a; /* Warna box yang cocok dengan background */
+  --primary-color: #b89b45; /* Darker yellow */
+  --background-color: #fff9e6; /* Light yellow */
+  --text-color: #192019; /* Complementary color for text */
+  --box-color: #d9c98a; /* Box color */
 }
 
 * {
@@ -12,10 +12,10 @@
 }
 
 body {
-  margin: 1rem; /* Updated margin */
-  background-color: var(--background-color); /* Updated background color */
+  margin: 1rem;
+  background-color: var(--background-color);
   font-family: "Raleway", sans-serif;
-  color: var(--text-color); /* Warna teks menggunakan warna komplemen */
+  color: var(--text-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
