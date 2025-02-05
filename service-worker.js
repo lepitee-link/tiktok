@@ -1,11 +1,11 @@
 const CACHE_NAME = "app-cache-v1";
 const urlsToCache = [
-  "/", // Adjust for GitHub Pages
-  "/index.html",
-  "/logo192.png",
-  "/logo512.png",
-  "/manifest.json",
-  "/produk",
+  "/tiktok/", // Adjust for GitHub Pages
+  "/tiktok/index.html",
+  "/tiktok/logo192.png",
+  "/tiktok/logo512.png",
+  "/tiktok/manifest.json",
+  "/tiktok/produk",
 ];
 
 // Install Event - Cache assets
