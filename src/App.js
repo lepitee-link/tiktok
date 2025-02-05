@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button } from "@mui/material";
+import { Container, Snackbar, Button } from "@mui/material";
 import BarangList from "./components/BarangList";
 import dataBarang from "./data/dataBarang.json";
 
 const App = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   useEffect(() => {
     const handler = (event) => {
@@ -17,6 +18,10 @@ const App = () => {
     return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
+  const handleSnackbarClose = () => {
+    setSnackbarOpen(false);
+  };
+
   const handleInstallClick = () => {
     if (deferredPrompt) {
       deferredPrompt.prompt();
@@ -27,22 +32,35 @@ const App = () => {
           console.log("User dismissed the install prompt.");
         }
         setDeferredPrompt(null);
+        setSnackbarOpen(false);
       });
     }
   };
 
+  const handleSnackbarOpen = () => {
+    setSnackbarOpen(true);
+  };
+
+  useEffect(() => {
+    if (deferredPrompt) {
+      handleSnackbarOpen();
+    }
+  }, [deferredPrompt]);
+
   return (
     <Container style={{ maxWidth: "475px", paddingLeft: 0, paddingRight: 0 }}>
       <BarangList barangData={dataBarang} />
-      {deferredPrompt && (
-        <Button
-          onClick={handleInstallClick}
-          variant="contained"
-          color="primary"
-        >
-          Install App
-        </Button>
-      )}
+      <Snackbar
+        open={snackbarOpen}
+        onClose={handleSnackbarClose}
+        message="Install the app for a better experience!"
+        action={
+          <Button color="inherit" onClick={handleInstallClick}>
+            Install
+          </Button>
+        }
+        autoHideDuration={6000}
+      />
     </Container>
   );
 };
