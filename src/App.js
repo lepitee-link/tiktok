@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Snackbar, Button, Alert } from "@mui/material";
+import { Container, Button, Snackbar, Alert } from "@mui/material";
 import BarangList from "./components/BarangList";
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/tiktok/data/dataBarang.json");
+        const response = await fetch("tiktok/data/dataBarang.json");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -29,8 +29,10 @@ const App = () => {
       event.preventDefault();
       setDeferredPrompt(event);
       setOpenSnackbar(true);
+      console.log("Install prompt event saved.");
     };
     window.addEventListener("beforeinstallprompt", handler);
+
     return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
@@ -52,6 +54,8 @@ const App = () => {
   return (
     <Container style={{ maxWidth: "475px", paddingLeft: 0, paddingRight: 0 }}>
       <BarangList barangData={barangData} />
+
+      {/* Snackbar Install Prompt */}
       <Snackbar
         open={openSnackbar}
         autoHideDuration={6000}
@@ -59,18 +63,28 @@ const App = () => {
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
         <Alert
-          onClose={() => setOpenSnackbar(false)}
           severity="info"
-          sx={{ backgroundColor: "#FFA500", color: "white" }}
+          sx={{
+            backgroundColor: "#FFA500",
+            color: "white",
+            fontFamily: "'Poppins', sans-serif",
+          }}
+          action={
+            <Button
+              onClick={handleInstallClick}
+              variant="contained"
+              sx={{
+                backgroundColor: "white",
+                color: "#FFA500",
+                fontWeight: "bold",
+                "&:hover": { backgroundColor: "#ffcc80" },
+              }}
+            >
+              Install
+            </Button>
+          }
         >
-          yuk install aplikasinya!💕
-          <Button
-            onClick={handleInstallClick}
-            size="small"
-            sx={{ marginLeft: 1, color: "white", fontWeight: "bold" }}
-          >
-            Pasang
-          </Button>
+          Yuk install aplikasinya!💕
         </Alert>
       </Snackbar>
     </Container>
