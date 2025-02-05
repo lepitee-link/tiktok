@@ -10,7 +10,9 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/data/dataBarang.json");
+        const response = await fetch(
+          `${process.env.PUBLIC_URL}/data/dataBarang.json`
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
