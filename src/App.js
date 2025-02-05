@@ -1,12 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button, Snackbar } from "@mui/material";
+import { Container, Button } from "@mui/material";
 import BarangList from "./components/BarangList";
-import dataBarang from "./data/dataBarang.json";
 
 const App = () => {
+  const [barangData, setBarangData] = useState([]);
   const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/data/dataBarang.json");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setBarangData(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const handler = (event) => {
@@ -33,38 +48,9 @@ const App = () => {
     }
   };
 
-  // Function to check for updates in dataBarang.json
-  const checkForUpdates = async () => {
-    try {
-      const response = await fetch("/data/dataBarang.json");
-      const updatedData = await response.json();
-
-      if (JSON.stringify(updatedData) !== JSON.stringify(dataBarang)) {
-        showSnackbar("Ada produk baru, cek sekarang!");
-      }
-    } catch (error) {
-      console.error("Error fetching dataBarang.json:", error);
-    }
-  };
-
-  const showSnackbar = (message) => {
-    setSnackbarMessage(message);
-    setSnackbarOpen(true);
-  };
-
-  const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
-  };
-
-  // Polling to check for updates every 30 seconds
-  useEffect(() => {
-    const intervalId = setInterval(checkForUpdates, 30000);
-    return () => clearInterval(intervalId); // Cleanup on component unmount
-  }, []);
-
   return (
     <Container style={{ maxWidth: "475px", paddingLeft: 0, paddingRight: 0 }}>
-      <BarangList barangData={dataBarang} />
+      <BarangList barangData={barangData} />
       {deferredPrompt && (
         <Button
           onClick={handleInstallClick}
@@ -74,12 +60,6 @@ const App = () => {
           Install App
         </Button>
       )}
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={6000}
-        onClose={handleSnackbarClose}
-        message={snackbarMessage}
-      />
     </Container>
   );
 };
