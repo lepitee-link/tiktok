@@ -1,19 +1,23 @@
-precacheAndRoute(self.__WB_MANIFEST);
+const CACHE_NAME = "app-cache-v1";
+const urlsToCache = [
+  "/", // Adjust for GitHub Pages
+  "/index.html",
+  "/logo192.png",
+  "/logo512.png",
+  "/manifest.json",
+];
 
+// Install Event - Cache assets
 self.addEventListener("install", (event) => {
-  console.log("Service Worker installing...");
   event.waitUntil(
-    caches.open("app-cache").then((cache) => {
-      return cache.addAll([
-        "./", // Fix path for GitHub Pages
-        "./index.html",
-        "./logo192.png",
-        "./logo512.png",
-      ]);
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(urlsToCache);
     })
   );
+  self.skipWaiting();
 });
 
+// Fetch Event - Serve cached files
 self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
@@ -22,6 +26,18 @@ self.addEventListener("fetch", (event) => {
   );
 });
 
+// Activate Event - Cleanup old caches
 self.addEventListener("activate", (event) => {
-  console.log("Service Worker activated!");
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            return caches.delete(cache);
+          }
+        })
+      );
+    })
+  );
+  self.clients.claim();
 });
