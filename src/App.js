@@ -1,26 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Container, Snackbar, Button } from "@mui/material";
+import { Container, Snackbar, Button, Alert } from "@mui/material";
 import BarangList from "./components/BarangList";
 import dataBarang from "./data/dataBarang.json";
 
 const App = () => {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   useEffect(() => {
     const handler = (event) => {
       event.preventDefault();
       setDeferredPrompt(event);
-      console.log("Install prompt event saved.");
+      setOpenSnackbar(true); // Tampilkan snackbar saat event beforeinstallprompt muncul
     };
     window.addEventListener("beforeinstallprompt", handler);
 
     return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
-
-  const handleSnackbarClose = () => {
-    setSnackbarOpen(false);
-  };
 
   const handleInstallClick = () => {
     if (deferredPrompt) {
@@ -32,35 +28,44 @@ const App = () => {
           console.log("User dismissed the install prompt.");
         }
         setDeferredPrompt(null);
-        setSnackbarOpen(false);
+        setOpenSnackbar(false);
       });
     }
   };
 
-  const handleSnackbarOpen = () => {
-    setSnackbarOpen(true);
-  };
-
-  useEffect(() => {
-    if (deferredPrompt) {
-      handleSnackbarOpen();
-    }
-  }, [deferredPrompt]);
-
   return (
     <Container style={{ maxWidth: "475px", paddingLeft: 0, paddingRight: 0 }}>
       <BarangList barangData={dataBarang} />
+
+      {/* Snackbar untuk PWA Install */}
       <Snackbar
-        open={snackbarOpen}
-        onClose={handleSnackbarClose}
-        message="Install the app for a better experience!"
-        action={
-          <Button color="inherit" onClick={handleInstallClick}>
-            Install
-          </Button>
-        }
-        autoHideDuration={6000}
-      />
+        open={openSnackbar}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        autoHideDuration={6000} // Snackbar akan hilang otomatis dalam 6 detik
+      >
+        <Alert
+          severity="info"
+          sx={{
+            backgroundColor: "#b89b45", // Warna theme
+            color: "#FFF9E6", // Warna teks biar kontras
+            fontWeight: "bold",
+          }}
+          action={
+            <Button
+              onClick={handleInstallClick}
+              sx={{
+                color: "#FFF9E6",
+                fontWeight: "bold",
+              }}
+            >
+              Install
+            </Button>
+          }
+        >
+          Yuk install aplikasinya! 💕💕💕
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
